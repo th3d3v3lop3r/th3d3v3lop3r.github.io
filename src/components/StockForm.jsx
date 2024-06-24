@@ -1,5 +1,5 @@
 import "./StockForm.css";
-import { useState, useContext } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import StockContext from "../contexts/StockContext";
 
 function StockForm(){
@@ -7,12 +7,36 @@ function StockForm(){
     const[symbol, setSymbol] = useState("")
     const[quantity, setQuantity] = useState("")
     const[price, setPrice] = useState("")
+    const[currPrice, setCurrPrice] = useState("");
+
+    useEffect(useCallback(()=>{
+        fetch(
+            "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo"
+            // "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+
+            // contextValue.stockData.symbol+
+            // "&apikey=RCR84F0BW6YSO54K"
+        )
+            .then((response)=>response.json())
+            .then(
+                (data)=>{
+                    console.log(data);
+                    // setCurrPrice(data["Global Quote"]["05. price"]);
+                    if (data && data['Global Quote'] && data['Global Quote']['05. price']) {
+                        setCurrPrice(data['Global Quote']['05. price']);
+                    } else {
+                        console.error("Global Quote or 05. price is undefined in API response");
+                    }
+                }
+            ),
+    [];
+    }))
 
     const handleAddStock = () => {
         const newStock = {
             symbol: symbol,
             quantity: quantity,
-            price: price
+            price: price,
+            currPrice: currPrice
         };
         contextValue.setStockData([...contextValue.stockData, newStock]);
         setSymbol("");
