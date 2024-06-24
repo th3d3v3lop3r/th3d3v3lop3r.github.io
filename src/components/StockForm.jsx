@@ -22,7 +22,7 @@ function StockForm(){
     return(
         <>
             <img src= "https://t3.ftcdn.net/jpg/01/26/22/24/360_F_126222457_lQglMmNhNPFRmcWrsIGYV4wfdm4gawYC.jpg"></img>
-            <div id="title_wrapper"><p id="title">Finance Dashboard</p></div>
+            <div id="title_wrapper"><p id="title">Finance dashboard</p></div>
             <div id="form">
                 <input className="input_box" placeholder="Stock Symbol" value={symbol} onChange={(event)=>{setSymbol(event.target.value)}}></input>
                 <input className="input_box" placeholder="Quantity" type="number" step={1} value={quantity} onChange={(event)=>{setQuantity(event.target.value)}}></input>
