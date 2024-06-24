@@ -11,10 +11,10 @@ function StockForm(){
 
     useEffect(useCallback(()=>{
         fetch(
-            "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo"
-            // "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+
-            // contextValue.stockData.symbol+
-            // "&apikey=RCR84F0BW6YSO54K"
+            // "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo"
+            "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+
+            symbol+
+            "&apikey=RCR84F0BW6YSO54K"
         )
             .then((response)=>response.json())
             .then(
